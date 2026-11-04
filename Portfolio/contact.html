@@ -3,24 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Contact — Harjeet Bajwa</title>
+<title>Contact &mdash; Harjeet Bajwa</title>
+<meta name="description" content="Contact details and enquiry form for Harjeet Bajwa, IT student based in Nelson, New Zealand.">
+<meta name="author" content="Harjeet Bajwa">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="shell">
 
+  <!-- ============ SIDEBAR (same on every page) ============ -->
   <aside class="rail">
     <p class="mark">Harjeet Bajwa<span>An IT Student</span></p>
 
     <nav class="nav" aria-label="Pages">
-      <a href="index.html">Home</a>
-      <a href="skills.html">Skills</a>
-      <a href="projects.html">Projects</a>
-      <a href="contact.html" class="is-current">Contact</a>
+        <a href="home.html">Home</a>
+        <a href="skills.html">Skills</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
     </nav>
 
     <div class="rail-foot">
@@ -29,24 +34,57 @@
     </div>
   </aside>
 
+  <!-- ============ PAGE CONTENT ============ -->
   <main>
-    <h2 class="page-title">Contact</h2>
-    <p class="page-note">Please E-mail me, Available for 2-3 hours from Thursday to Sunday.</p>
+    <div class="page-content">
+    <h1 class="page-title">Contact</h1>
+    <p class="page-note">Please email me. I am available 2 to 3 hours a day, Thursday to Sunday.</p>
 
     <dl class="contact-list">
-      <div class="contact-row"><dt>Email</dt><dd><a href="mailto:harjeetchhapa34@gmail.com">harjeetchhapa34@gmail.com</a></dd></div>
-      <div class="contact-row"><dt>GitHub</dt><dd><a href="#">github.com/harjeetbajwa34</a></dd></div>
+      <div class="contact-row">
+        <dt>Email</dt>
+        <dd><a href="mailto:harjeetchhapa34@gmail.com">harjeetchhapa34@gmail.com</a></dd>
+      </div>
+      <div class="contact-row">
+        <dt>Location</dt>
+        <dd>Nelson, New Zealand</dd>
+      </div>
     </dl>
 
-    <form action="mailto:harjeet@example.com" method="post" enctype="text/plain">
-      <label class="field"><span>Your name</span><input type="text" name="name" required></label>
-      <label class="field"><span>Your email</span><input type="email" name="email" required></label>
-      <label class="field"><span>Message</span><textarea name="message" required></textarea></label>
+    <form id="contact-form" novalidate>
+      <label class="field">
+        <span>Your name</span>
+        <input type="text" id="name" name="name" required>
+        <small class="error" id="name-error"></small>
+      </label>
+
+      <label class="field">
+        <span>Your email</span>
+        <input type="email" id="email" name="email" required>
+        <small class="error" id="email-error"></small>
+      </label>
+
+      <label class="field">
+        <span>Message</span>
+        <textarea id="message" name="message" required></textarea>
+        <small class="error" id="message-error"></small>
+      </label>
+
       <button class="btn" type="submit">Send message</button>
-      <p class="form-note">I will try to get in touch with you as soon as possible.</p>
+
+      <p class="form-note" id="form-note">I will try to get in touch with you as soon as possible.</p>
     </form>
+
+    </div>
+
+    <footer class="site-footer">
+      <p>&copy; <span id="year">2026</span>. Built with HTML, CSS and JavaScript.</p>
+    </footer>
   </main>
+
 </div>
+
+<script src="script.js"></script>
 
 </body>
 </html>

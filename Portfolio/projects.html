@@ -1,41 +1,91 @@
-<!-- ============ PROJECTS ============ -->
-<section class="page" id="projects">
-  <h2 class="page-title">Projects</h2>
-  <p class="page-note">Projects I have built during my course — click any image to open it full size.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Projects &mdash; Harjeet Bajwa</title>
+<meta name="description" content="Coursework projects by Harjeet Bajwa: conceptual and logical data models, a UML use case diagram and a user journey map.">
+<meta name="author" content="Harjeet Bajwa">
 
-  <article class="project">
-    <div>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ============ SIDEBAR (same on every page) ============ -->
+  <aside class="rail">
+    <p class="mark">Harjeet Bajwa<span>An IT Student</span></p>
+
+    <nav class="nav" aria-label="Pages">
+        <a href="home.html">Home</a>
+        <a href="skills.html">Skills</a>
+        <a href="projects.html">Projects</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="rail-foot">
+      <p>Nelson, New Zealand</p>
+      <p><a href="mailto:harjeetchhapa34@gmail.com">harjeetchhapa34@gmail.com</a></p>
+    </div>
+  </aside>
+
+  <!-- ============ PAGE CONTENT ============ -->
+  <main>
+    <div class="page-content">
+    <h1 class="page-title">Projects</h1>
+    <p class="page-note">Projects I have built during my course. Click any image to open it full size.</p>
+
+    <article class="project">
       <h3>Conceptual model</h3>
       <p>An entity relationship diagram for a physiotherapy clinic, built in Visual Paradigm. It maps the entities and the relationships between them, from patients and appointments through to invoices and ACC claims.</p>
       <div class="chips"><span class="chip">Visual Paradigm</span><span class="chip">ERD</span></div>
-      <a href="CM.png" target="_blank"><img class="project-img" src="CM.png" alt="Conceptual ER diagram for a physiotherapy clinic"></a>
-    </div>
-  </article>
+      <a class="project-link" href="CM.png" target="_blank" rel="noopener noreferrer">
+        <img class="project-img" src="CM.png" alt="Conceptual entity relationship diagram for a physiotherapy clinic">
+      </a>
+    </article>
 
-  <article class="project">
-    <div>
+    <article class="project">
       <h3>Logical model</h3>
-      <p>The same clinic system taken to a logical design — every table with its columns, data types, primary and foreign keys, including the linking tables that resolve the many-to-many relationships.</p>
+      <p>The same clinic system taken to a logical design. Every table is shown with its columns, data types, primary keys and foreign keys, including the linking tables that resolve the many-to-many relationships.</p>
       <div class="chips"><span class="chip">Visual Paradigm</span><span class="chip">Database design</span><span class="chip">Normalisation</span></div>
-      <a href="LM.png" target="_blank"><img class="project-img" src="LM.png" alt="Logical data model showing tables, columns and keys"></a>
-    </div>
-  </article>
+      <a class="project-link" href="LM.png" target="_blank" rel="noopener noreferrer">
+        <img class="project-img" src="LM.png" alt="Logical data model showing tables, columns and keys">
+      </a>
+    </article>
 
-  <article class="project">
-    <div>
+    <article class="project">
       <h3>Use case diagram</h3>
-      <p>A use case diagram for an online bookstore, drawn in Visio. It shows what customers, the owner and the accounting system can each do, with the payment step included by checkout and sales recording.</p>
+      <p>A use case diagram for an online bookstore, drawn in Visio. It shows what the customer, the owner and the accounting system can each do, with the payment step included by checkout and sales recording.</p>
       <div class="chips"><span class="chip">Visio</span><span class="chip">UML</span></div>
-      <a href="UC.png" target="_blank"><img class="project-img" src="UC.png" alt="Use case diagram for an online bookstore"></a>
-    </div>
-  </article>
+      <a class="project-link" href="UC.png" target="_blank" rel="noopener noreferrer">
+        <img class="project-img" src="UC.png" alt="Use case diagram for an online bookstore">
+      </a>
+    </article>
 
-  <article class="project">
-    <div>
+    <article class="project">
       <h3>User journey map</h3>
-      <p>A journey map made in Figma following a customer buying a book online, from discovery through to post-purchase, recording their goals, feelings and pain points at each stage.</p>
+      <p>A journey map made in Figma that follows a customer buying a book online, from discovery through to post-purchase, recording their goals, feelings and pain points at each stage.</p>
       <div class="chips"><span class="chip">Figma</span><span class="chip">UX research</span></div>
-      <a href="JM.png" target="_blank"><img class="project-img" src="JM.png" alt="User journey map for buying a book online"></a>
+      <a class="project-link" href="JM.png" target="_blank" rel="noopener noreferrer">
+        <img class="project-img" src="JM.png" alt="User journey map for buying a book online">
+      </a>
+    </article>
+
     </div>
-  </article>
-</section>
+
+    <footer class="site-footer">
+      <p>&copy; <span id="year">2026</span>. Built with HTML, CSS and JavaScript.</p>
+    </footer>
+  </main>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

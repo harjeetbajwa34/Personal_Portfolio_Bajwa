@@ -1,20 +1,33 @@
-/* ---------- tokens ---------- */
+/* =========================================================
+   style.css — one stylesheet shared by all four pages
+   Harjeet Bajwa — personal portfolio
+   ========================================================= */
+
+
+/* ---------- tokens ----------
+   Every colour, font and spacing value is written once here.
+   Change a value in this block and it updates on all pages. */
 :root{
-  --paper:#DADAFB;
-  --surface:#e4e4e4;
-  --ink:#1E1A2B;
-  --ink-2:#565073;
-  --line:#D8D3EC;
-  --accent:#9893DA;
-  --accent-soft:#DCEDE4;
+  --paper:#DADAFB;         /* page background */
+  --surface:#F1F1F8;       /* chips and form fields */
+  --ink:#1E1A2B;           /* main text */
+  --ink-2:#565073;         /* secondary text */
+  --line:#BDBBE4;          /* borders and rules */
+  --accent:#9893DA;        /* decorative purple */
+  --accent-strong:#5B51B8; /* darker purple for links and buttons */
+  --white:#FFFFFF;
+  --error:#B3261E;
+
   --serif:"Fraunces",Georgia,serif;
   --sans:"IBM Plex Sans",system-ui,sans-serif;
+
   --gap:clamp(1.5rem,4vw,3rem);
+  --radius:6px;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
 
-html{scroll-behavior:smooth}
+/* ---------- reset ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
 
 body{
   background:var(--paper);
@@ -27,13 +40,18 @@ body{
 
 a{color:inherit}
 
+img{max-width:100%;display:block}
+
+/* one focus outline for the whole site, so keyboard users
+   can always see where they are */
 :focus-visible{
-  outline:2px solid var(--accent);
+  outline:2px solid var(--accent-strong);
   outline-offset:3px;
   border-radius:2px;
 }
 
-/* ---------- shell ---------- */
+
+/* ---------- shell: sidebar + content ---------- */
 .shell{
   display:grid;
   grid-template-columns:280px 1fr;
@@ -42,7 +60,8 @@ a{color:inherit}
   margin:0 auto;
 }
 
-/* ---------- left rail ---------- */
+
+/* ---------- left sidebar ---------- */
 .rail{
   position:sticky;
   top:0;
@@ -63,8 +82,17 @@ a{color:inherit}
   letter-spacing:-.015em;
 }
 
-.mark span{display:block;font-size:.82rem;font-family:var(--sans);font-weight:400;color:var(--ink-2);letter-spacing:0;margin-top:.5rem}
+.mark span{
+  display:block;
+  margin-top:.5rem;
+  font-family:var(--sans);
+  font-size:.82rem;
+  font-weight:400;
+  letter-spacing:0;
+  color:var(--ink-2);
+}
 
+/* navigation: one link per page, no jump links */
 .nav{display:flex;flex-direction:column;gap:.15rem}
 
 .nav a{
@@ -78,26 +106,38 @@ a{color:inherit}
 
 .nav a:hover{color:var(--ink);border-color:var(--ink-2)}
 
+/* script.js adds this class to the link of the page you are on */
 .nav a.is-current{
   color:var(--ink);
   font-weight:500;
-  border-color:var(--accent);
+  border-color:var(--accent-strong);
 }
 
 .rail-foot{
   margin-top:auto;
   font-size:.82rem;
-  color:var(--ink-2);
   line-height:1.5;
+  color:var(--ink-2);
+  word-break:break-word;
 }
 
 .rail-foot a{text-decoration:none;border-bottom:1px solid var(--line)}
-.rail-foot a:hover{border-color:var(--accent);color:var(--accent)}
+.rail-foot a:hover{color:var(--accent-strong);border-color:var(--accent-strong)}
 
-/* ---------- pages ---------- */
-main{padding:var(--gap);max-width:820px}
 
-main{animation:enter .35s ease both}
+/* ---------- main content ---------- */
+main{
+  padding:var(--gap);
+  max-width:820px;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  animation:enter .35s ease both;
+}
+
+/* holds the content of the page and grows to fill the space,
+   which keeps the footer at the bottom with a clear gap above it */
+.page-content{flex:1;padding-bottom:3rem}
 
 @keyframes enter{
   from{opacity:0;transform:translateY(8px)}
@@ -114,26 +154,62 @@ main{animation:enter .35s ease both}
 
 .page-note{color:var(--ink-2);margin-bottom:2.5rem;max-width:56ch}
 
-/* ---------- home ---------- */
+.site-footer{
+  margin-top:auto;
+  padding-top:2rem;
+  border-top:1px solid var(--line);
+  font-size:.82rem;
+  color:var(--ink-2);
+}
+
+
+/* ---------- home page ---------- */
+.hero{
+  display:flex;
+  align-items:flex-start;
+  gap:2rem;
+}
+
+.hero-content{flex:1;min-width:0}
+
 .hero-name{
   font-family:var(--serif);
   font-weight:600;
-  font-size:clamp(3rem,9vw,5.2rem);
+  font-size:clamp(2.6rem,7vw,4.4rem);
   line-height:.95;
   letter-spacing:-.035em;
-  margin:2rem 0 1.25rem;
+  margin:0 0 1.25rem;
 }
 
+/* puts the surname on its own line in purple */
 .hero-name em{
   display:block;
   font-style:normal;
-  color:var(--accent);
+  color:var(--accent-strong);
 }
 
-.hero-rule{width:72px;height:3px;background:var(--accent);margin-bottom:1.5rem}
+.hero-rule{
+  width:72px;
+  height:3px;
+  background:var(--accent-strong);
+  margin-bottom:1.5rem;
+}
 
 .hero-text{max-width:54ch;color:var(--ink-2);font-size:1.06rem}
 .hero-text + .hero-text{margin-top:1rem}
+
+/* fixed width and height plus object-fit keeps the oval
+   the same shape whatever size the photo file is */
+.profile-photo{
+  flex:none;
+  width:180px;
+  height:240px;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:50%;
+  border:1px solid var(--line);
+  background:var(--surface);
+}
 
 .actions{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.25rem}
 
@@ -142,18 +218,19 @@ main{animation:enter .35s ease both}
   font-weight:500;
   cursor:pointer;
   text-decoration:none;
+  display:inline-block;
   padding:.7rem 1.4rem;
   border-radius:999px;
   border:1px solid var(--ink);
   background:var(--ink);
-  color:var(--surface);
-  transition:background .18s ease,color .18s ease;
+  color:var(--white);
+  transition:background .18s ease,border-color .18s ease;
 }
 
-.btn:hover{background:var(--accent);border-color:var(--accent)}
+.btn:hover{background:var(--accent-strong);border-color:var(--accent-strong)}
 
 .btn.ghost{background:none;color:var(--ink);border-color:var(--line)}
-.btn.ghost:hover{border-color:var(--ink);background:none;color:var(--ink)}
+.btn.ghost:hover{background:none;color:var(--ink);border-color:var(--ink)}
 
 .facts{
   display:grid;
@@ -161,13 +238,14 @@ main{animation:enter .35s ease both}
   gap:1.5rem;
   margin-top:3.5rem;
   padding-top:2rem;
-  border-top:0px solid var(--line);
+  border-top:1px solid var(--line);
 }
 
 .fact dt{font-size:.85rem;color:var(--ink-2)}
 .fact dd{font-family:var(--serif);font-size:1.35rem;margin-top:.15rem}
 
-/* ---------- skills ---------- */
+
+/* ---------- skills page ---------- */
 .skill-group{
   display:grid;
   grid-template-columns:180px 1fr;
@@ -184,52 +262,87 @@ main{animation:enter .35s ease both}
   font-weight:600;
 }
 
-.skill-group p{font-size:.9rem;color:var(--ink-2);margin-top:.2rem}
-
 .chips{display:flex;flex-wrap:wrap;gap:.5rem;align-content:start}
 
 .chip{
   background:var(--surface);
   border:1px solid var(--line);
-  border-radius:6px;
+  border-radius:var(--radius);
   padding:.35rem .7rem;
   font-size:.9rem;
 }
 
-.chip.strong{background:var(--accent-soft);border-color:transparent;color:#12503c}
 
-/* ---------- projects ---------- */
+/* ---------- projects page ---------- */
 .project{
-  display:grid;
-  grid-template-columns:1fr;
-  gap: 10px;;
-  padding:1.75rem 0;
+  padding:2rem 0;
   border-top:1px solid var(--line);
 }
 
 .project:last-of-type{border-bottom:1px solid var(--line)}
 
-.project-year{font-size:.85rem;color:var(--ink-2);padding-top:.35rem}
+.project h3{
+  font-family:var(--serif);
+  font-size:1.35rem;
+  font-weight:600;
+  letter-spacing:-.01em;
+}
 
-.project h3{font-family:var(--serif);font-size:1.35rem;font-weight:600;letter-spacing:-.01em}
-.project p{color:var(--ink-2);margin:.5rem 0 .9rem;max-width:52ch}
+.project p{color:var(--ink-2);margin:.5rem 0 .9rem;max-width:56ch}
 
-.project-links{display:flex;gap:1.25rem;margin-top:.9rem;font-size:.92rem}
-.project-links a{text-decoration:none;color:var(--accent);border-bottom:1px solid var(--accent-soft);padding-bottom:1px}
-.project-links a:hover{border-color:var(--accent)}
+.project-link{display:block;margin-top:1.25rem}
+
+/* white background matters: the diagrams have transparent areas
+   that would otherwise turn purple and become hard to read */
 .project-img{
-  display:block;
   width:100%;
-  margin-top:1rem;
   border:1px solid var(--line);
   border-radius:8px;
-  background:#fff;
+  background:var(--white);
   transition:border-color .18s ease;
 }
 
-.project-img:hover{border-color:var(--accent)}
+.project-img:hover{border-color:var(--accent-strong)}
 
-/* ---------- contact ---------- */
+
+/* ---------- lightbox (opened by script.js) ---------- */
+.lightbox{
+  position:fixed;
+  inset:0;
+  z-index:50;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+  background:rgba(30,26,43,.85);
+}
+
+.lightbox.is-open{display:flex}
+
+.lightbox img{
+  max-width:100%;
+  max-height:85vh;
+  border-radius:8px;
+  background:var(--white);
+}
+
+.lightbox-close{
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  font:inherit;
+  font-size:1.5rem;
+  line-height:1;
+  cursor:pointer;
+  padding:.4rem .8rem;
+  border:none;
+  border-radius:var(--radius);
+  background:var(--white);
+  color:var(--ink);
+}
+
+
+/* ---------- contact page ---------- */
 .contact-list{margin-bottom:2.5rem}
 
 .contact-row{
@@ -241,31 +354,63 @@ main{animation:enter .35s ease both}
 }
 
 .contact-row:last-child{border-bottom:1px solid var(--line)}
-.contact-row dt{color:var(--ink-2);font-size:.9rem}
+.contact-row dt{font-size:.9rem;color:var(--ink-2)}
+.contact-row dd{word-break:break-word}
 .contact-row a{text-decoration:none;border-bottom:1px solid var(--line)}
-.contact-row a:hover{color:var(--accent);border-color:var(--accent)}
+.contact-row a:hover{color:var(--accent-strong);border-color:var(--accent-strong)}
 
 .field{display:block;margin-bottom:1.1rem;max-width:520px}
 .field span{display:block;font-size:.9rem;margin-bottom:.35rem}
 
-.field input,.field textarea{
+.field input,
+.field textarea{
   font:inherit;
   width:100%;
   padding:.65rem .8rem;
   background:var(--surface);
   border:1px solid var(--line);
-  border-radius:6px;
+  border-radius:var(--radius);
   color:var(--ink);
+  transition:border-color .18s ease;
 }
 
-.field input:focus,.field textarea:focus{border-color:var(--accent);outline:none}
+.field input:focus,
+.field textarea:focus{border-color:var(--accent-strong);outline:none}
+
 .field textarea{min-height:130px;resize:vertical}
 
-.form-note{font-size:.85rem;color:var(--ink-2);margin-top:1rem;max-width:48ch}
+/* script.js adds this class when a field is left empty or wrong */
+.field input.is-invalid,
+.field textarea.is-invalid{border-color:var(--error)}
 
-/* ---------- responsive ---------- */
+.error{
+  display:block;
+  min-height:1.2em;
+  margin-top:.25rem;
+  font-size:.82rem;
+  color:var(--error);
+}
+
+.form-note{font-size:.85rem;color:var(--ink-2);margin-top:1rem;max-width:48ch}
+.form-note.is-success{color:#1B6B3A;font-weight:500}
+
+
+/* ---------- index.html redirect page ---------- */
+.redirect{
+  max-width:600px;
+  margin:0 auto;
+  padding:6rem var(--gap);
+  text-align:center;
+}
+
+.redirect h1{font-family:var(--serif);font-size:2rem;margin-bottom:.5rem}
+.redirect p{margin-bottom:1.5rem;color:var(--ink-2)}
+
+
+/* ---------- responsive: phones and small tablets ---------- */
 @media (max-width:820px){
   .shell{grid-template-columns:1fr}
+
   .rail{
     position:static;
     height:auto;
@@ -273,40 +418,32 @@ main{animation:enter .35s ease both}
     border-bottom:1px solid var(--line);
     gap:1.25rem;
   }
+
   .nav{flex-direction:row;flex-wrap:wrap;gap:1.25rem}
-  .nav a{border-left:none;border-bottom:2px solid transparent;padding:0 0 .25rem}
-  .nav a.is-current{border-color:var(--accent)}
+
+  .nav a{
+    border-left:none;
+    border-bottom:2px solid transparent;
+    padding:0 0 .25rem;
+  }
+
+  .nav a.is-current{border-color:var(--accent-strong)}
+
   .rail-foot{display:none}
-  main{max-width:none}
-  .skill-group,.project,.contact-row{grid-template-columns:1fr;gap:.75rem}
-  .project-year{padding-top:0}
+
+  main{max-width:none;min-height:auto}
+
+  /* photo moves above the name instead of being squashed beside it */
+  .hero{flex-direction:column-reverse;align-items:flex-start;gap:1.5rem}
+  .profile-photo{width:140px;height:180px}
+
+  .skill-group,
+  .contact-row{grid-template-columns:1fr;gap:.75rem}
 }
 
+
+/* ---------- respect a request for less motion ---------- */
 @media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto}
   main{animation:none}
   *{transition-duration:.01ms !important}
-}
-/* ---------- home hero with photo ---------- */
-.hero {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; 
-  gap: 2rem;
-}
-
-.hero-content {
-  flex: 1;
-}
-
-.hero-name {
-  margin-top: 0;
-}
-
-.profile-photo {
-  width: 180px;
-  height: 240px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
 }
