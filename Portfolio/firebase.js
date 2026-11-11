@@ -4,7 +4,10 @@ import {
     getFirestore,
     collection,
     addDoc,
-    getDocs
+    getDocs,
+    doc,
+    updateDoc,
+    deleteDoc
 } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -61,10 +64,7 @@ async function loadMessages() {
 
         const messageList = document.getElementById("messageList");
 
-        if (!messageList) {
-            console.log("messageList div not found");
-            return;
-        }
+        if (!messageList) return;
 
         messageList.innerHTML = "";
 
@@ -72,15 +72,24 @@ async function loadMessages() {
             collection(db, "messages")
         );
 
-        querySnapshot.forEach((doc) => {
+        querySnapshot.forEach((docItem) => {
 
-            const data = doc.data();
+            const data = docItem.data();
 
             messageList.innerHTML += `
-                <div style="margin-bottom:20px;">
+                <div style="margin-bottom:20px; padding:10px; border:1px solid #ccc;">
                     <h3>${data.name}</h3>
                     <p>${data.email}</p>
                     <p>${data.message}</p>
+
+                    <button onclick="editMessage('${docItem.id}', '${data.message}')">
+                        Edit
+                    </button>
+
+                    <button onclick="deleteMessage('${docItem.id}')">
+                        Delete
+                    </button>
+
                     <hr>
                 </div>
             `;
@@ -91,5 +100,64 @@ async function loadMessages() {
         console.error("READ ERROR:", error);
     }
 }
+
+window.editMessage = async function(id, currentMessage) {
+
+    const newMessage = prompt(
+        "Edit your message:",
+        currentMessage
+    );
+
+    if (!newMessage) return;
+
+    try {
+
+        const messageRef = doc(
+            db,
+            "messages",
+            id
+        );
+
+        await updateDoc(messageRef, {
+            message: newMessage
+        });
+
+        alert("Message Updated Successfully!");
+
+        loadMessages();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Update Failed");
+    }
+};
+
+window.deleteMessage = async function(id) {
+
+    const confirmDelete = confirm(
+        "Are you sure you want to delete this message?"
+    );
+
+    if (!confirmDelete) return;
+
+    try {
+
+        await deleteDoc(
+            doc(db, "messages", id)
+        );
+
+        alert("Message Deleted Successfully!");
+
+        loadMessages();
+
+    } catch (error) {
+
+        console.error(error);
+
+        alert("Delete Failed");
+    }
+};
 
 loadMessages();
