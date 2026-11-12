@@ -17,15 +17,15 @@
 
 <div class="shell">
 
-  <!-- ============ SIDEBAR (same on every page) ============ -->
+  <!-- ============ SIDEBAR ============ -->
   <aside class="rail">
     <p class="mark">Harjeet Bajwa<span>An IT Student</span></p>
 
     <nav class="nav" aria-label="Pages">
-        <a href="home.html">Home</a>
-        <a href="skills.html">Skills</a>
-        <a href="projects.html">Projects</a>
-        <a href="contact.html">Contact</a>
+      <a href="home.html">Home</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html" class="is-current" aria-current="page">Contact</a>
     </nav>
 
     <div class="rail-foot">
@@ -37,55 +37,169 @@
   <!-- ============ PAGE CONTENT ============ -->
   <main>
     <div class="page-content">
-    <h1 class="page-title">Contact</h1>
-    <p class="page-note">Please email me. I am available 2 to 3 hours a day, Thursday to Sunday.</p>
 
-    <dl class="contact-list">
-      <div class="contact-row">
-        <dt>Email</dt>
-        <dd><a href="mailto:harjeetchhapa34@gmail.com">harjeetchhapa34@gmail.com</a></dd>
-      </div>
-      <div class="contact-row">
-        <dt>Location</dt>
-        <dd>Nelson, New Zealand</dd>
-      </div>
-    </dl>
+      <h1 class="page-title">Contact</h1>
+      <p class="page-note">Please email me. I am available 2 to 3 hours a day, Thursday to Sunday.</p>
 
-    <form id="contact-form" novalidate>
-      <label class="field">
-        <span>Your name</span>
-        <input type="text" id="name" name="name" required>
-        <small class="error" id="name-error"></small>
-      </label>
+      <dl class="contact-list">
+        <div class="contact-row">
+          <dt>Email</dt>
+          <dd><a href="mailto:harjeetchhapa34@gmail.com">harjeetchhapa34@gmail.com</a></dd>
+        </div>
+        <div class="contact-row">
+          <dt>Location</dt>
+          <dd>Nelson, New Zealand</dd>
+        </div>
+      </dl>
 
-      <label class="field">
-        <span>Your email</span>
-        <input type="email" id="email" name="email" required>
-        <small class="error" id="email-error"></small>
-      </label>
+      <!-- ============ ACCOUNT: register / login ============ -->
+      <section class="block" aria-labelledby="account-title">
+        <h2 class="block-title" id="account-title">Log in to leave a message</h2>
 
-      <label class="field">
-        <span>Message</span>
-        <textarea id="message" name="message" required></textarea>
-        <small class="error" id="message-error"></small>
-      </label>
+        <div id="auth-panel">
+          <div class="tabs" role="tablist" aria-label="Account">
+            <button class="tab" id="tab-login" type="button" role="tab" aria-selected="true" aria-controls="login-form">Log in</button>
+            <button class="tab" id="tab-register" type="button" role="tab" aria-selected="false" aria-controls="register-form">Create account</button>
+          </div>
 
-      <button class="btn" type="submit">Send message</button>
+          <!-- Login -->
+          <form id="login-form" class="auth-form" role="tabpanel" aria-labelledby="tab-login" novalidate>
+            <label class="field">
+              <span>Email</span>
+              <input type="email" id="login-email" autocomplete="email" required>
+              <small class="error" id="login-email-error"></small>
+            </label>
 
-      <p class="form-note" id="form-note">I will try to get in touch with you as soon as possible.</p>
-    </form>
-    
-    <h2>Messages</h2>
-<div id="messageList"> </div>
+            <label class="field">
+              <span>Password</span>
+              <input type="password" id="login-password" autocomplete="current-password" required>
+              <small class="error" id="login-password-error"></small>
+            </label>
 
-    <footer class="site-footer">
-      <p>&copy; <span id="year">2026</span>. Built with HTML, CSS and JavaScript.</p>
-    </footer>
+            <div class="captcha">
+              <div id="login-captcha"></div>
+              <small class="error" id="login-captcha-error"></small>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn" id="login-btn" type="submit">Log in</button>
+              <button class="link-btn" id="forgot-btn" type="button">Forgot password?</button>
+            </div>
+
+            <p class="form-note" id="login-note" role="status" aria-live="polite"></p>
+          </form>
+
+          <!-- Register -->
+          <form id="register-form" class="auth-form" role="tabpanel" aria-labelledby="tab-register" novalidate hidden>
+            <label class="field">
+              <span>Your name</span>
+              <input type="text" id="reg-name" autocomplete="name" maxlength="80" required>
+              <small class="error" id="reg-name-error"></small>
+            </label>
+
+            <label class="field">
+              <span>Email</span>
+              <input type="email" id="reg-email" autocomplete="email" required>
+              <small class="error" id="reg-email-error"></small>
+            </label>
+
+            <label class="field">
+              <span>Password</span>
+              <input type="password" id="reg-password" autocomplete="new-password" minlength="8" required aria-describedby="password-hint">
+              <small class="hint" id="password-hint">At least 8 characters, with a letter and a number.</small>
+              <small class="error" id="reg-password-error"></small>
+            </label>
+
+            <label class="field">
+              <span>Confirm password</span>
+              <input type="password" id="reg-confirm" autocomplete="new-password" required>
+              <small class="error" id="reg-confirm-error"></small>
+            </label>
+
+            <div class="captcha">
+              <div id="register-captcha"></div>
+              <small class="error" id="register-captcha-error"></small>
+            </div>
+
+            <button class="btn" id="register-btn" type="submit">Create account</button>
+
+            <p class="form-note" id="register-note" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <!-- Shown after login -->
+        <div id="account-panel" class="account-panel" hidden>
+          <p class="account-line">Hello, <strong id="account-name">there</strong></p>
+          <p class="account-line account-email">
+            <span id="account-email"></span>
+            <span class="badge" id="verify-status" data-state="warn">Email not verified</span>
+          </p>
+
+          <div class="form-actions">
+            <div id="verify-actions" class="form-actions">
+              <button class="btn btn-small" id="refresh-btn" type="button">I have verified</button>
+              <button class="link-btn" id="resend-btn" type="button">Resend verification email</button>
+            </div>
+            <button class="link-btn" id="logout-btn" type="button">Log out</button>
+          </div>
+
+          <p class="form-note" id="account-note" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <!-- ============ SEND A MESSAGE ============ -->
+      <section class="block" aria-labelledby="send-title">
+        <h2 class="block-title" id="send-title">Send a message</h2>
+        <p class="form-lock" id="form-lock">Log in or create an account to send a message.</p>
+
+        <form id="contact-form" novalidate>
+          <fieldset id="contact-fieldset" disabled>
+            <legend class="visually-hidden">Message details</legend>
+
+            <label class="field">
+              <span>Your name</span>
+              <input type="text" id="name" name="name" maxlength="80" required>
+              <small class="error" id="name-error"></small>
+            </label>
+
+            <label class="field">
+              <span>Your email</span>
+              <input type="email" id="email" name="email" readonly>
+              <small class="hint">Taken from your verified account.</small>
+            </label>
+
+            <label class="field">
+              <span>Message</span>
+              <textarea id="message" name="message" maxlength="1000" required></textarea>
+              <small class="char-count" id="message-count">0 / 1000</small>
+              <small class="error" id="message-error"></small>
+            </label>
+
+            <button class="btn" id="send-btn" type="submit">Send message</button>
+          </fieldset>
+
+          <p class="form-note" id="form-note" role="status" aria-live="polite">I will try to get in touch with you as soon as possible.</p>
+        </form>
+      </section>
+
+      <!-- ============ MESSAGES ============ -->
+      <section class="block" aria-labelledby="messages-title">
+        <h2 class="block-title" id="messages-title">Messages</h2>
+        <p class="form-note" id="messages-note" role="status" aria-live="polite"></p>
+        <p class="messages-empty" id="messages-empty">Log in to read the messages.</p>
+        <ul class="message-list" id="message-list"></ul>
+      </section>
+
+      <footer class="site-footer">
+        <p>&copy; <span id="year">2026</span>. Built with HTML, CSS and JavaScript.</p>
+      </footer>
+
+    </div>
   </main>
 
 </div>
 
-<script type="module" src="firebase.js"></script>
+<script type="module" src="app.js"></script>
 
 </body>
 </html>
